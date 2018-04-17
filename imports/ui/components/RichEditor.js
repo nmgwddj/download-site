@@ -7,11 +7,23 @@ class RichEditor extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      htmlContent: ''
+      htmlContent: '',
+      isReady: false
     }
   }
 
+  componentDidMount() {
+    this.state.isReady = true
+  }
+
+  componentWillUnmount() {
+    this.state.isReady = false
+  }
+
   handleHTMLChange (htmlContent) {
+    if (!this.state.isReady) {
+      return false
+    }
     const { onChange } = this.props
     this.setState({ htmlContent })
     onChange(htmlContent)

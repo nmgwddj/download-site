@@ -20,6 +20,7 @@ export default compose(
   withTracker(({ match }) => {
     const { packageId } = match.params
     const handlePackages = Meteor.subscribe('packages.one', packageId)
+
     return {
       isReady: handlePackages.ready(),
       pack: Packages.findOne(packageId)

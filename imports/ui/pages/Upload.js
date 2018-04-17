@@ -24,15 +24,19 @@ export default compose(
   withTracker(({ history, user, match }) => {
     const { packageId } = match.params
     const handle = Meteor.subscribe('users.current')
-    const handlePackage = Meteor.subscribe('packages.one', packageId)
-
     if (handle.ready() && !user) {
       history.push('/')
     }
-    return {
-      isReady: handlePackage.ready(),
-      isEdit: packageId !== undefined,
-      pack: Packages.findOne(packageId)
+
+    if (packageId) {
+      const handlePackage = Meteor.subscribe('packages.one', packageId)
+      return {
+        isReady: handlePackage.ready(),
+        isEdit: packageId !== undefined,
+        pack: Packages.findOne(packageId)
+      }
+    } else {
+      return {}
     }
   })
 )(Upload)
