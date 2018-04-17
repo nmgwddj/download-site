@@ -2,7 +2,7 @@ import React from 'react'
 import { Meteor } from 'meteor/meteor'
 import { withTracker } from 'meteor/react-meteor-data'
 import { Route, withRouter, Link } from 'react-router-dom'
-import { Layout, Menu, Icon, Modal } from 'antd'
+import { Layout, Menu, Icon, Modal, Avatar } from 'antd'
 import { compose, withHandlers } from 'recompose'
 
 import Types from '../../api/types/types'
@@ -46,7 +46,7 @@ const MainLayout = ({ login, user, isReady, types, location, linkTo }) => {
             { user ? null : <Menu.Item key='/login' style={styles.login}>
               <span><Icon type='upload' />我要上传</span>
             </Menu.Item> }
-            { user ? <SubMenu title={<span><Icon type='user' />{user.username}</span>} style={styles.login}>
+            { user ? <SubMenu title={<span><Avatar style={styles.avatar} icon="user" />{user.username}</span>} style={styles.login}>
               <Menu.Item key='/packageAdd'>上传软件</Menu.Item>
               <Menu.Item key='logout'>退出登录</Menu.Item>
             </SubMenu> : null }
@@ -128,6 +128,10 @@ const styles = {
     width: 1160,
     margin: '0 auto',
     lineHeight: '64px'
+  },
+  avatar: {
+    paddingLeft: 7,
+    marginRight: 10
   },
   content: {
     width: 1160,

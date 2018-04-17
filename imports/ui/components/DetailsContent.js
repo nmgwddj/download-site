@@ -11,7 +11,7 @@ const DetailsContent = ({ pack }) => {
       <TabPane tab={<span><Icon type='exception' />软件简介</span>} key='description'>
         <Row gutter={24}>
           <Col span={16}>
-            <div dangerouslySetInnerHTML={{ __html: pack.description }}>
+            <div className='package-description' dangerouslySetInnerHTML={{ __html: pack.description }}>
               {/*  */}
             </div>
           </Col>

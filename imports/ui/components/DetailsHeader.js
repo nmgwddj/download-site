@@ -51,7 +51,7 @@ const DetailsHeader = ({ pack, isReady, user, onDownloadFile, onSuccess }) => {
           onSuccess={() => onSuccess(pack._id)}
           style={styles.downloadButton}
         >
-          迅雷下载
+          <span>迅雷下载</span>
         </Clipboard>
       </Col>
     </Row>
