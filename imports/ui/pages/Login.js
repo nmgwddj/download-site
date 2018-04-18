@@ -63,7 +63,6 @@ export default compose(
           Meteor.loginWithPassword(username, password, (error, result) => {
             if (!error) {
               message.success('登录成功，您可以上传自己喜欢的软件了。')
-              history.push('/upload')
             } else {
               message.error(`登录失败: ${error.message}`)
             }

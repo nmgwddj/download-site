@@ -175,18 +175,6 @@ const UploadForm = ({
           <Input placeholder='在这里输入本次上传的软件版本信息' />
         )}
       </FormItem>
-      { isEdit ? <FormItem
-        {...formItemLayout}
-        label='更新版本'
-      >
-        {getFieldDecorator('update', {
-          rules: [{
-            required: true, message: '请选择是否更新版本'
-          }]
-        })(
-          <Switch />
-        )}
-      </FormItem> : null }
       <FormItem
         {...formItemLayout}
         label='软件摘要'
@@ -233,6 +221,18 @@ const UploadForm = ({
           <RichEditor />
         )}
       </FormItem>
+      { isEdit ? <FormItem
+        {...formItemLayout}
+        label='更新版本'
+      >
+        {getFieldDecorator('update', {
+          rules: [{
+            required: false, message: '请选择是否更新版本'
+          }]
+        })(
+          <Switch />
+        )}
+      </FormItem> : null }
       <FormItem {...tailFormItemLayout}>
         <Button
           type='primary'
@@ -254,14 +254,15 @@ export default compose(
   withState('downloadUrl', 'setDownloadUrl', null),
   withState('fileSize', 'setFileSize', 0),
   withHandlers({
-    handleSubmit: ({ history, fileSize, form }) => (event) => {
+    handleSubmit: ({ history, fileSize, isEdit, pack, form }) => (event) => {
       event.preventDefault()
       form.validateFields((error, values) => {
         if (!error) {
           Object.assign(values, {
             size: fileSize
           })
-          Meteor.call('packages.add', values, (err, res) => {
+          const action = isEdit ? 'edit' : 'add'
+          Meteor.call(`packages.${action}`, values, pack._id, (err, res) => {
             if (!err) {
               message.success('添加成功')
               history.push('/')

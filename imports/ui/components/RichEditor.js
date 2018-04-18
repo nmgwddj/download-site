@@ -30,11 +30,13 @@ class RichEditor extends React.Component {
   }
 
   render () {
+    const value = this.props.value;
     const editorProps = {
       placeholder: '输入软件的详细介绍信息',
-      initialContent: '',
+      initialContent: value,
       onHTMLChange: this.handleHTMLChange.bind(this),
-      viewWrapper: '.editor'
+      viewWrapper: '.editor',
+      contentFormat: 'html'
     }
 
     return (
