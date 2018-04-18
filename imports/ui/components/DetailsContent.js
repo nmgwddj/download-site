@@ -16,7 +16,7 @@ const DetailsContent = ({ pack }) => {
             </div>
           </Col>
           <Col span={8}>
-            <Sidebar tags={pack.tags} />
+            <Sidebar pack={pack} />
           </Col>
         </Row>
       </TabPane>
