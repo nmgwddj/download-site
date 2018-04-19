@@ -1,5 +1,6 @@
 import React from 'react'
 import Clipboard from 'react-clipboard.js'
+import { Link } from 'react-router-dom'
 import { Meteor } from 'meteor/meteor'
 import { withHandlers, compose } from 'recompose'
 import { withTracker } from 'meteor/react-meteor-data'
@@ -36,7 +37,7 @@ const DetailsHeader = ({ pack, isReady, user, onDownloadFile, onSuccess }) => {
             onSuccess={() => onSuccess(pack._id)}
             style={styles.downloadButton}
           >
-            电驴下载
+            <span>电驴下载</span>
           </Clipboard>
           : <Button
             type='primary' size='large'
@@ -156,6 +157,7 @@ const styles = {
     width: 120
   },
   downloadButton: {
+    marginRight: 15,
     color: '#FFF',
     borderStyle: 'none',
     cursor: 'pointer',
